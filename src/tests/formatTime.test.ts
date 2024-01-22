@@ -14,7 +14,7 @@ describe('formatTime function', () => {
     });
 
     test('correctly resets hours to 0 once surpasses 100 hours', () => {
-        const ms = 359999000; // 1 hour, 1 minute, 1 second, and 10 milliseconds
+        const ms = 359999000;
         const formattedTime = formatTime(ms);
         expect(formattedTime).toBe('99:59:59.00');
         const msNew = ms + 1000;
