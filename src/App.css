@@ -2,27 +2,75 @@ body {
     font-family: 'Myriad', sans-serif;
 }
 .App {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    min-height: 100vh;
-    background-color: #95BF46;
-    padding: 20px;
-    font-family: 'Myriad', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  /* background inspired by https://www.shopify.com/start */
+  background: 
+    linear-gradient(217deg, #61D6BD, #A7DED0 70.71%),
+    linear-gradient(127deg, #62D5BE, white 70.71%),
+    linear-gradient(336deg, white, #94BE45 50.71%);
+  padding: 20px;
 }
 
-  .buttons {
-    display: flex;
-    justify-content: space-around;
-    width: 100%;
-  }
-  
-  .buttons button {
-    font-size: 1em;
-    cursor: pointer;
-    font-family: inherit;
-  }
+.stopwatch-container {
+  margin-top: 10vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 1px 5px 0 grey;
+  padding: 30px;
+  width: 300px;
+  max-height: 330px;
+  overflow: hidden;
+}
 
-  .laps {
-    width: 100%;
-  }
+.display {
+  font-size: 2.5em;
+  margin: 20px 0;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  margin-bottom: 20px;
+}
+  
+.buttons button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 18px;
+  font-size: 1.1em;
+  font-weight: bold;
+  cursor: pointer;
+  font-family: inherit;
+  background-color: black;
+  color: white;
+  transition: background-color 0.2s;
+}
+
+.buttons button:hover {
+  background-color: #3F3F45;
+}
+
+.laps {
+  width: 100%;
+  overflow-y: auto;
+  text-align: left;
+  font-family: inherit;
+  font-size: 1em;
+  flex-grow: 1;
+}
+
+.laps div {
+  margin: 5px 4px;
+  padding: 2px 5px;
+  background: linear-gradient(217deg, #8cf5c4, #A7DED0 70.71%);
+  border-radius: 3px;
+}
