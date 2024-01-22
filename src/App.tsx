@@ -2,11 +2,13 @@ import React, { useEffect, useState, useCallback } from 'react';
 import './App.css';
 import StopWatchButton from './StopWatchButton';
 import StopWatch from './StopWatch';
+import { formatTime } from './utils';
 
 // Stopwatch component using React Functional Components.
 const App: React.FC = () => {
-    // State: `time` for stopwatch time in milliseconds, `isRunning` for stopwatch status.
+    // State: `time` for stopwatch time in milliseconds, `isRunning` for stopwatch status and 'laps' to record lap times.
     const [time, setTime] = useState<number>(0);
+    const [laps, setLaps] = useState<number[]>([]);
     const [isRunning, setIsRunning] = useState<boolean>(false);
     
     // Effect to handle the stopwatch timing logic.
@@ -33,22 +35,40 @@ const App: React.FC = () => {
 
     const handleReset = useCallback(() => {
         setTime(0);
+        setLaps([]);
     }, []);
+
+    const handleLap = useCallback(() => {
+        // Calculate the duration of the new lap by subtracting the total duration of previous laps from the current time.
+        // `reduce` iterates over `laps`, accumulating total lap time in `acc` and using `current` to refer to the current lap time.
+        const totalPreviousLaps = laps.reduce((acc, current) => acc + current, 0);
+        const newLapTime = time - totalPreviousLaps;
+        setLaps(prevLaps => [...prevLaps, newLapTime]);
+      }, [time, laps]);
+
 
     return (
         <div className="App">
             <div className="stopwatch-container">
                 <StopWatch time={time} />
                 <StopWatchButton
-                isRunning={isRunning}
-                time={time}
-                onStart={handleStart}
-                onStop={handleStop}
-                onReset={handleReset}
+                    isRunning={isRunning}
+                    time={time}
+                    onStart={handleStart}
+                    onStop={handleStop}
+                    onReset={handleReset}
+                    onLap={handleLap}
                 />
+                {/* Intentional design choice to exclude lap display from StopWatch component, laps appear beneath buttons for better UX as buttons are fixed in position.
+                Should be refactored into separate LapList component, however left un-factored to maintain given directory structure. */}
+                <div className="laps">
+                    {laps.map((lap, index) => (
+                    <div key={index}>Lap {index}: {formatTime(lap)}</div>
+                ))}
+                </div>
             </div>
         </div>
-    )
+    );
 };
 
 export default App;

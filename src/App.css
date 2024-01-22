@@ -22,3 +22,7 @@ body {
     cursor: pointer;
     font-family: inherit;
   }
+
+  .laps {
+    width: 100%;
+  }
