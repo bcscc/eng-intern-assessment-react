@@ -1,7 +1,7 @@
+// Constants and types defined in same file for directory simplicity but should be refactored if new definition additions.
 export const MILLISECONDS_IN_SECOND = 1000;
 export const SECONDS_IN_MINUTE = 60;
 export const MINUTE_IN_HOUR = 60;
-
 
 export type TimeFormat = (ms: number) => string;
 

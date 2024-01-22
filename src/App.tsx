@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import {formatTime} from './utils';
+import React, { useEffect, useState, useCallback } from 'react';
 import './App.css';
+import StopWatchButton from './StopWatchButton';
+import StopWatch from './StopWatch';
 
 // Stopwatch component using React Functional Components.
 const App: React.FC = () => {
@@ -20,14 +21,31 @@ const App: React.FC = () => {
         return () => interval && clearInterval(interval);
     }, [isRunning]);
 
+
+    // useCallback ensures that the same function instance is reused across renders.
+    const handleStart = useCallback(() => {
+        setIsRunning(true);
+    }, []);
+
+    const handleStop = useCallback(() => {
+        setIsRunning(false);
+    }, []);
+
+    const handleReset = useCallback(() => {
+        setTime(0);
+    }, []);
+
     return (
         <div className="App">
             <div className="stopwatch-container">
-                <div className="display">{formatTime(time)}</div> {/* Display current time */}
-                <div className="buttons">
-                    <button onClick={() => setIsRunning(true)}>Start</button> {/* Start button */}
-                    <button onClick={() => setIsRunning(false)}>Stop</button> {/* Stop button */}
-                </div>
+                <StopWatch time={time} />
+                <StopWatchButton
+                isRunning={isRunning}
+                time={time}
+                onStart={handleStart}
+                onStop={handleStop}
+                onReset={handleReset}
+                />
             </div>
         </div>
     )
