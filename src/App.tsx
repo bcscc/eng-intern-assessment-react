@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
+import {formatTime} from './utils';
 import './App.css';
 
 // Stopwatch component using React Functional Components.
@@ -22,7 +23,7 @@ const App: React.FC = () => {
     return (
         <div className="App">
             <div className="stopwatch-container">
-                <div className="display">{time}</div> {/* Display current time */}
+                <div className="display">{formatTime(time)}</div> {/* Display current time */}
                 <div className="buttons">
                     <button onClick={() => setIsRunning(true)}>Start</button> {/* Start button */}
                     <button onClick={() => setIsRunning(false)}>Stop</button> {/* Stop button */}
