@@ -74,3 +74,8 @@ body {
   background: linear-gradient(217deg, #8cf5c4, #A7DED0 70.71%);
   border-radius: 3px;
 }
+
+.lap-item {
+  display: flex;
+  justify-content: space-between;
+}

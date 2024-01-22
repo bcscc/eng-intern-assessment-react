@@ -62,9 +62,12 @@ const App: React.FC = () => {
                 {/* Intentional design choice to exclude lap display from StopWatch component, laps appear beneath buttons for better UX as buttons are fixed in position.
                 Should be refactored into separate LapList component, however left un-factored to maintain given directory structure. */}
                 <div className="laps">
-                    {laps.map((lap, index) => (
-                    <div key={index}>Lap {index}: {formatTime(lap)}</div>
-                ))}
+                    {[...laps].reverse().map((lap, index) => ( 
+                        <div key={index} className="lap-item"> {/* Reverse lap list to display most recent lap on top. */}
+                            <span>Lap {laps.length - index}</span>
+                            <span>{formatTime(lap)}</span>
+                        </div>
+                    ))}
                 </div>
             </div>
         </div>
